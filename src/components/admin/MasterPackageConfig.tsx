@@ -269,7 +269,7 @@ export function MasterPackageConfig() {
                           Detailed engagement reports
                         </p>
                       </div>
-                      <div className="ml-auto">
+                      <div className="ml-auto self-center">
                         {formData.analytics ? (
                           <div className="bg-purple-600 text-white rounded-full p-0.5">
                             <Check className="w-3 h-3" />
@@ -297,7 +297,7 @@ export function MasterPackageConfig() {
                           One-click navigation
                         </p>
                       </div>
-                      <div className="ml-auto">
+                      <div className="ml-auto self-center">
                         {formData.hasStoreDirection ? (
                           <div className="bg-green-600 text-white rounded-full p-0.5">
                             <Check className="w-3 h-3" />
@@ -325,7 +325,7 @@ export function MasterPackageConfig() {
                           Sync to mobile devices
                         </p>
                       </div>
-                      <div className="ml-auto">
+                      <div className="ml-auto self-center">
                         {formData.includeMobileApp ? (
                           <div className="bg-indigo-600 text-white rounded-full p-0.5">
                             <Check className="w-3 h-3" />

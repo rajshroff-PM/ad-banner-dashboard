@@ -36,7 +36,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-lg">AdSync Admin</h1>
+                <h1 className="text-lg">Paathner AdSync Admin</h1>
                 <p className="text-xs text-purple-100">Management Console</p>
               </div>
             </div>

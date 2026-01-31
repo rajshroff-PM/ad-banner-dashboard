@@ -34,11 +34,11 @@ export function MerchantLayout({ children }: MerchantLayoutProps) {
                 <Store className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-lg">AdSync Merchant</h1>
+                <h1 className="text-lg">Paathner AdSync Merchant</h1>
                 <p className="text-xs text-gray-500">{user?.locationName}</p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <div className="text-right">
                 <p className="text-sm">{user?.name}</p>
@@ -63,16 +63,15 @@ export function MerchantLayout({ children }: MerchantLayoutProps) {
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
-              
+
               return (
                 <button
                   key={item.path}
                   onClick={() => navigate(item.path)}
-                  className={`flex items-center gap-2 px-4 py-3 border-b-2 transition ${
-                    isActive
+                  className={`flex items-center gap-2 px-4 py-3 border-b-2 transition ${isActive
                       ? 'border-indigo-600 text-indigo-600'
                       : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
-                  }`}
+                    }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span className="text-sm">{item.label}</span>

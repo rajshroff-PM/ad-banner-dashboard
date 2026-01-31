@@ -18,7 +18,7 @@ export function Login() {
 
     try {
       const success = await login(email, password);
-      
+
       if (success) {
         // Determine redirect based on email (mock logic)
         if (email.includes('admin')) {
@@ -44,7 +44,7 @@ export function Login() {
 
     try {
       const success = await login(userEmail, 'demo');
-      
+
       if (success) {
         if (userEmail.includes('admin')) {
           navigate('/admin/dashboard');
@@ -66,7 +66,7 @@ export function Login() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-600 rounded-2xl mb-4">
             <Store className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl mb-2">AdSync Dashboard</h1>
+          <h1 className="text-3xl mb-2">Paathner AdSync Dashboard</h1>
           <p className="text-gray-600">Kiosk & Mobile Ad Management Platform</p>
         </div>
 
