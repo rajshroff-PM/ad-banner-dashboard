@@ -106,6 +106,7 @@ interface DataContextType {
   updateOrderApprovalStage: (orderId: string, stage: BannerOrder['approvalStage'], approver: string) => void;
   // Draft methods
   setBannerDraft: (draft: BannerDraft | null) => void;
+  merchants: Merchant[];
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -289,6 +290,38 @@ const INITIAL_ORDERS: BannerOrder[] = [
   }
 ];
 
+export interface Merchant {
+  id: string;
+  name: string;
+  email: string;
+  locationId: string;
+  locationName: string;
+}
+
+const INITIAL_MERCHANTS: Merchant[] = [
+  {
+    id: 'm1',
+    name: 'John Merchant',
+    email: 'merchant@demo.com',
+    locationId: 'loc1',
+    locationName: 'Aero Mall'
+  },
+  {
+    id: 'm2',
+    name: 'Sarah Store',
+    email: 'merchant2@demo.com',
+    locationId: 'loc2',
+    locationName: 'City Center'
+  },
+  {
+    id: 'm3',
+    name: 'Tech Gadgets',
+    email: 'tech@demo.com',
+    locationId: 'loc1',
+    locationName: 'Aero Mall'
+  }
+];
+
 export function DataProvider({ children }: { children: ReactNode }) {
   const [packages, setPackages] = useState<Package[]>(INITIAL_PACKAGES);
   const [locations, setLocations] = useState<Location[]>(INITIAL_LOCATIONS);
@@ -296,6 +329,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [locationPricing, setLocationPricingState] = useState<LocationPricing[]>(INITIAL_PRICING);
   const [orders, setOrders] = useState<BannerOrder[]>(INITIAL_ORDERS);
   const [bannerDraft, setBannerDraft] = useState<BannerDraft | null>(null);
+  const [merchants] = useState<Merchant[]>(INITIAL_MERCHANTS);
 
   const addPackage = (pkg: Package) => {
     setPackages(prev => [...prev, pkg]);
@@ -393,6 +427,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         locationPricing,
         orders,
         bannerDraft,
+        merchants,
         addPackage,
         updatePackage,
         deletePackage,

@@ -124,9 +124,13 @@ export function BannerCreation() {
     // If Admin, create order directly (Skip Payment/Approval)
     if (isAdmin) {
       const transactionId = `ADM${Date.now()}`;
+      // Use selected merchant if available (from admin flow), otherwise current user (fallback)
+      const merchantId = (packageInfo as any).merchantId || user!.id;
+      const merchantName = (packageInfo as any).merchantName || user!.name;
+
       createOrder({
-        merchantId: user!.id,
-        merchantName: user!.name, // Admin creating on behalf, or self? Assuming self for now or needs selection.
+        merchantId,
+        merchantName,
         locationId: user!.locationId || 'admin-loc', // Admin might not have locationId? 
         locationName: user!.locationName || 'Admin Location',
         packageId: packageInfo.packageId,

@@ -2,16 +2,36 @@ import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import { useData } from '../../contexts/DataContext';
 import { AdminLayout } from './AdminLayout';
-import { MapPin, Package as PackageIcon, ArrowRight, Check, Smartphone } from 'lucide-react';
+import { MapPin, Package as PackageIcon, ArrowRight, Check, Smartphone, Search } from 'lucide-react';
 
 export function AdminBannerSetup() {
     const navigate = useNavigate();
-    const { locations, packages, getLocationPrice } = useData();
+    const { locations, packages, getLocationPrice, merchants } = useData();
+    // const [merchants] = useState([]); // Placeholder if not in context yet, but we added it.
 
     const [selectedLocationId, setSelectedLocationId] = useState('');
+    const [selectedMerchantId, setSelectedMerchantId] = useState('');
+    const [merchantSearchQuery, setMerchantSearchQuery] = useState('');
     const [selectedPackageId, setSelectedPackageId] = useState('');
     const [selectedDuration, setSelectedDuration] = useState('');
     const [price, setPrice] = useState(0);
+
+    // Filter available merchants for selected location
+    // Filter available merchants for selected location with search
+    const availableMerchants = useMemo(() => {
+        if (!selectedLocationId) return [];
+        let filtered = merchants.filter(m => m.locationId === selectedLocationId);
+
+        if (merchantSearchQuery.trim()) {
+            const query = merchantSearchQuery.toLowerCase();
+            filtered = filtered.filter(m =>
+                m.name.toLowerCase().includes(query) ||
+                m.email.toLowerCase().includes(query)
+            );
+        }
+
+        return filtered;
+    }, [selectedLocationId, merchants, merchantSearchQuery]);
 
     // Filter valid packages for selected location
     const availablePackages = useMemo(() => {
@@ -30,13 +50,17 @@ export function AdminBannerSetup() {
 
     const handleProceed = () => {
         const pkg = packages.find(p => p.id === selectedPackageId);
-        if (selectedLocationId && selectedPackageId && pkg && selectedDuration) {
+        const merchant = merchants.find(m => m.id === selectedMerchantId);
+
+        if (selectedLocationId && selectedMerchantId && selectedPackageId && pkg && selectedDuration && merchant) {
             navigate('/admin/banner/create', {
                 state: {
                     packageId: pkg.id,
                     packageName: pkg.name,
                     price: price,
-                    duration: selectedDuration
+                    duration: selectedDuration,
+                    merchantId: merchant.id,
+                    merchantName: merchant.name
                 }
             });
         }
@@ -63,6 +87,9 @@ export function AdminBannerSetup() {
                                 key={loc.id}
                                 onClick={() => {
                                     setSelectedLocationId(loc.id);
+                                    setSelectedMerchantId('');
+                                    setMerchantSearchQuery('');
+                                    setSelectedPackageId('');
                                     setSelectedPackageId('');
                                     setSelectedDuration('');
                                 }}
@@ -81,11 +108,64 @@ export function AdminBannerSetup() {
                     </div>
                 </div>
 
-                {/* Step 2: Select Package & Duration */}
+                {/* Step 2: Select Merchant */}
                 {selectedLocationId && (
                     <div className="bg-white rounded-xl border border-gray-200 p-6">
-                        <div className="flex items-center gap-3 mb-6">
+                        <div className="flex items-center gap-3 mb-4">
                             <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-medium">2</div>
+                            <h3 className="text-lg font-medium">Select Merchant</h3>
+                        </div>
+
+                        {/* Search Bar */}
+                        <div className="mb-4 relative">
+                            <div className="flex items-center gap-3 w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white focus-within:ring-2 focus-within:ring-purple-500 focus-within:border-transparent transition-all">
+                                <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                                <input
+                                    type="text"
+                                    placeholder="Search merchants by name or email..."
+                                    value={merchantSearchQuery}
+                                    onChange={(e) => setMerchantSearchQuery(e.target.value)}
+                                    className="w-full border-none focus:outline-none text-sm placeholder:text-gray-400"
+                                />
+                            </div>
+                        </div>
+
+                        {availableMerchants.length === 0 ? (
+                            <p className="text-gray-500 italic">No merchants found for this location.</p>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {availableMerchants.map(merchant => (
+                                    <button
+                                        key={merchant.id}
+                                        onClick={() => {
+                                            setSelectedMerchantId(merchant.id);
+                                            // Reset subsequent steps if needed, generally keeping package selection is fine though 
+                                            // unless packages depend on merchant (they don't currently)
+                                        }}
+                                        className={`p-4 rounded-lg border-2 text-left transition ${selectedMerchantId === merchant.id
+                                            ? 'border-purple-600 bg-purple-50'
+                                            : 'border-gray-200 hover:border-gray-300'
+                                            }`}
+                                    >
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 font-bold text-xs">
+                                                {merchant.name.charAt(0)}
+                                            </div>
+                                            <span className="font-medium">{merchant.name}</span>
+                                        </div>
+                                        <p className="text-sm text-gray-500 pl-10">{merchant.email}</p>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Step 3: Select Package & Duration */}
+                {selectedLocationId && selectedMerchantId && (
+                    <div className="bg-white rounded-xl border border-gray-200 p-6">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-medium">3</div>
                             <h3 className="text-lg font-medium">Select Package Configuration</h3>
                         </div>
 
@@ -140,7 +220,7 @@ export function AdminBannerSetup() {
                 <div className="flex justify-end">
                     <button
                         onClick={handleProceed}
-                        disabled={!selectedLocationId || !selectedPackageId || !selectedDuration}
+                        disabled={!selectedLocationId || !selectedMerchantId || !selectedPackageId || !selectedDuration}
                         className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition font-medium text-lg flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Continue to Banner Details
