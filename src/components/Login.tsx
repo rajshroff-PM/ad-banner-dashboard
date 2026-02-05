@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { Store, Shield } from 'lucide-react';
+import logo from '../assets/logo.svg';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -63,9 +64,7 @@ export function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-600 rounded-2xl mb-4">
-            <Store className="w-8 h-8 text-white" />
-          </div>
+          <img src={logo} alt="Paathner AdSync" className="w-20 h-20 mx-auto mb-4 object-contain rounded-2xl" />
           <h1 className="text-3xl mb-2">Paathner AdSync Dashboard</h1>
           <p className="text-gray-600">Kiosk & Mobile Ad Management Platform</p>
         </div>

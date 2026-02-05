@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext';
 import { Store, ShoppingBag, Package, LogOut, LayoutDashboard, Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '../../components/ui/sheet';
+import logo from '../../assets/logo.svg';
 
 interface MerchantLayoutProps {
   children: ReactNode;
@@ -31,9 +32,7 @@ export function MerchantLayout({ children }: MerchantLayoutProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
-                <Store className="w-6 h-6 text-white" />
-              </div>
+              <img src={logo} alt="Paathner AdSync" className="w-10 h-10 rounded-lg object-contain" />
               <div>
                 <h1 className="text-lg">Paathner AdSync Merchant</h1>
                 <p className="text-xs text-gray-500">{user?.locationName}</p>
@@ -110,14 +109,7 @@ export function MerchantLayout({ children }: MerchantLayoutProps) {
                     return (
                       <button
                         key={item.path}
-                        onClick={() => {
-                          navigate(item.path);
-                          // Close sheet? The sheet usually closes on interaction if configured or we can rely on route change if standard
-                          // Usually need a controlled state to close, but let's see if default behavior is enough or if apply controlled.
-                          // For shadcn sheet, clicking inside might not close it unless it's a link?
-                          // Adding a primitive close via document click or just relying on user to tap out?
-                          // Better: relying on simple navigation for now.
-                        }}
+                        onClick={() => navigate(item.path)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${isActive
                           ? 'bg-indigo-50 text-indigo-600'
                           : 'text-gray-600 hover:bg-gray-50'
@@ -163,7 +155,6 @@ export function MerchantLayout({ children }: MerchantLayoutProps) {
             <p className="text-sm font-medium">{user?.name}</p>
             <p className="text-xs text-gray-500">{user?.locationName}</p>
           </div>
-          {/* Mobile: Show name also on smaller screens if space permits, or just icon */}
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-gray-700">{user?.name}</span>
             <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-medium border border-indigo-200">

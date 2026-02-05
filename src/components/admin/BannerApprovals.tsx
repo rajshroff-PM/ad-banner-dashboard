@@ -66,19 +66,19 @@ export function BannerApprovals() {
         </div>
 
         {/* Filters */}
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {(['under_review', 'approved', 'rejected', 'all'] as const).map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}
-              className={`px-4 py-2 rounded-lg text-sm transition ${filter === status
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm transition ${filter === status
                 ? 'bg-purple-600 text-white'
                 : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300'
                 }`}
             >
               {status === 'under_review' ? 'Pending' : status === 'all' ? 'All' : status.charAt(0).toUpperCase() + status.slice(1)}
               {status !== 'all' && (
-                <span className="ml-2">
+                <span className="ml-1 sm:ml-2">
                   ({orders.filter(o => o.status === status).length})
                 </span>
               )}
@@ -88,12 +88,12 @@ export function BannerApprovals() {
 
         {/* Orders List */}
         {filteredOrders.length === 0 ? (
-          <div className="bg-white rounded-xl p-12 text-center border border-gray-200">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="w-8 h-8 text-gray-400" />
+          <div className="bg-white rounded-xl p-8 sm:p-12 text-center border border-gray-200">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" />
             </div>
-            <h3 className="text-xl mb-2">No {filter === 'all' ? '' : filter.replace('_', ' ')} banners</h3>
-            <p className="text-gray-600">
+            <h3 className="text-lg sm:text-xl mb-2">No {filter === 'all' ? '' : filter.replace('_', ' ')} banners</h3>
+            <p className="text-sm sm:text-base text-gray-600">
               {filter === 'under_review'
                 ? 'All caught up! No pending approvals at the moment.'
                 : 'No banners to display.'}
@@ -105,25 +105,25 @@ export function BannerApprovals() {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-3 sm:px-6 text-left text-xs text-gray-600 uppercase tracking-wider whitespace-nowrap">
                       Banner
                     </th>
-                    <th className="px-6 py-3 text-left text-xs text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-3 sm:px-6 text-left text-xs text-gray-600 uppercase tracking-wider whitespace-nowrap">
                       Merchant
                     </th>
-                    <th className="px-6 py-3 text-left text-xs text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-3 sm:px-6 text-left text-xs text-gray-600 uppercase tracking-wider whitespace-nowrap">
                       Location
                     </th>
-                    <th className="px-6 py-3 text-left text-xs text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-3 sm:px-6 text-left text-xs text-gray-600 uppercase tracking-wider whitespace-nowrap">
                       Schedule
                     </th>
-                    <th className="px-6 py-3 text-left text-xs text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-3 sm:px-6 text-left text-xs text-gray-600 uppercase tracking-wider whitespace-nowrap">
                       Amount
                     </th>
-                    <th className="px-6 py-3 text-left text-xs text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-3 sm:px-6 text-left text-xs text-gray-600 uppercase tracking-wider whitespace-nowrap">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-3 sm:px-6 text-left text-xs text-gray-600 uppercase tracking-wider whitespace-nowrap">
                       Actions
                     </th>
                   </tr>
@@ -134,40 +134,40 @@ export function BannerApprovals() {
 
                     return (
                       <tr key={order.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-3">
+                        <td className="px-4 py-3 sm:px-6 sm:py-4">
+                          <div className="flex items-center gap-3 min-w-[200px]">
                             <img
                               src={order.imageUrl}
                               alt={order.bannerName}
-                              className="w-20 h-12 object-cover rounded"
+                              className="w-16 h-10 sm:w-20 sm:h-12 object-cover rounded"
                             />
                             <div>
-                              <p className="font-medium">{order.bannerName}</p>
-                              <p className="text-sm text-gray-500">{order.packageName}</p>
+                              <p className="font-medium text-sm sm:text-base">{order.bannerName}</p>
+                              <p className="text-xs sm:text-sm text-gray-500">{order.packageName}</p>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
                           <p className="text-sm">{order.merchantName}</p>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
                           <p className="text-sm">{order.locationName}</p>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
                           <div className="text-sm">
                             <p>{new Date(order.startDate).toLocaleDateString()}</p>
                             <p className="text-gray-500">to {new Date(order.endDate).toLocaleDateString()}</p>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
                           <p className="text-sm">₹{order.price.toLocaleString()}</p>
                         </td>
-                        <td className="px-6 py-4">
-                          <span className={`inline-flex px-3 py-1 rounded-full text-xs ${statusConfig.bg} ${statusConfig.text}`}>
+                        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
+                          <span className={`inline-flex px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs ${statusConfig.bg} ${statusConfig.text}`}>
                             {statusConfig.label}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
                           <button
                             onClick={() => setSelectedOrder(order.id)}
                             className="text-purple-600 hover:text-purple-700 text-sm inline-flex items-center gap-1"
@@ -190,23 +190,23 @@ export function BannerApprovals() {
       {selectedOrderDetails && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
-              <h3 className="text-xl">Review Banner Submission</h3>
+            <div className="p-4 sm:p-6 border-b border-gray-200">
+              <h3 className="text-lg sm:text-xl">Review Banner Submission</h3>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="p-4 sm:p-6 space-y-6">
               {/* Banner Preview */}
               <div>
                 <label className="block text-sm text-gray-600 mb-2">Banner Preview</label>
                 <img
                   src={selectedOrderDetails.imageUrl}
                   alt={selectedOrderDetails.bannerName}
-                  className="w-full rounded-lg border border-gray-200"
+                  className="w-full rounded-lg border border-gray-200 max-h-[300px] object-cover"
                 />
               </div>
 
               {/* Details Grid */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-sm text-gray-600 mb-1">Banner Name</label>
                   <p className="font-medium">{selectedOrderDetails.bannerName}</p>
@@ -246,7 +246,7 @@ export function BannerApprovals() {
                 </div>
                 <div>
                   <label className="block text-sm text-gray-600 mb-1">Transaction ID</label>
-                  <p className="font-medium font-mono text-sm">{selectedOrderDetails.transactionId}</p>
+                  <p className="font-medium font-mono text-sm break-all">{selectedOrderDetails.transactionId}</p>
                 </div>
               </div>
 

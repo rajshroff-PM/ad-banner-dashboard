@@ -86,7 +86,7 @@ export function AdminBannerSetup() {
                 </div>
 
                 {/* Step 1: Select Location */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-medium">1</div>
                         <h3 className="text-lg font-medium">Select Location</h3>
@@ -139,7 +139,7 @@ export function AdminBannerSetup() {
 
                 {/* Step 2: Select Merchant */}
                 {selectedLocationId && (
-                    <div className="bg-white rounded-xl border border-gray-200 p-6">
+                    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-medium">2</div>
                             <h3 className="text-lg font-medium">Select Merchant</h3>
@@ -192,7 +192,7 @@ export function AdminBannerSetup() {
 
                 {/* Step 3: Select Package & Duration */}
                 {selectedLocationId && selectedMerchantId && (
-                    <div className="bg-white rounded-xl border border-gray-200 p-6">
+                    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-medium">3</div>
                             <h3 className="text-lg font-medium">Select Package Configuration</h3>

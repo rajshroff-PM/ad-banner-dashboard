@@ -13,6 +13,7 @@ import { MasterPackageConfig } from "./components/admin/MasterPackageConfig";
 import { LocationManagement } from "./components/admin/LocationManagement";
 import { LocationPricingSetup } from "./components/admin/LocationPricingSetup";
 import { AdminBannerSetup } from "./components/admin/AdminBannerSetup";
+import { AnalyticsHub } from "./components/admin/AnalyticsHub";
 import { NotFound } from "./components/NotFound";
 
 export const router = createBrowserRouter([
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
       { path: "merchant/payment/success", Component: PaymentSuccess },
       // Admin Routes
       { path: "admin/dashboard", Component: AdminDashboard },
+      { path: "admin/analytics", Component: AnalyticsHub },
       { path: "admin/approvals", Component: BannerApprovals },
       { path: "admin/packages", Component: MasterPackageConfig },
       { path: "admin/locations", Component: LocationManagement },

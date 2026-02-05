@@ -73,39 +73,39 @@ export function AdminDashboard() {
     <AdminLayout>
       <div className="space-y-8">
         {/* Welcome Section */}
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 text-white">
-          <h2 className="text-2xl mb-2">Admin Dashboard</h2>
-          <p className="text-purple-100 mb-6">
+        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 sm:p-8 text-white">
+          <h2 className="text-xl sm:text-2xl mb-2">Admin Dashboard</h2>
+          <p className="text-purple-100 mb-6 text-sm sm:text-base">
             Manage advertising campaigns, approve banners, and configure packages
           </p>
           {pendingApprovals > 0 && (
             <button
               onClick={() => navigate('/admin/approvals')}
-              className="bg-white text-purple-600 px-6 py-3 rounded-lg hover:bg-purple-50 transition inline-flex items-center gap-2"
+              className="bg-white text-purple-600 px-4 py-2 sm:px-6 sm:py-3 rounded-lg hover:bg-purple-50 transition inline-flex items-center gap-2 text-sm sm:text-base"
             >
-              <Clock className="w-5 h-5" />
+              <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
               Review {pendingApprovals} Pending {pendingApprovals === 1 ? 'Banner' : 'Banners'}
             </button>
           )}
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((stat) => {
             const Icon = stat.icon;
             return (
               <div
                 key={stat.label}
-                className={`bg-white rounded-xl p-6 border border-gray-200 ${stat.action ? 'cursor-pointer hover:shadow-lg transition' : ''}`}
+                className={`bg-white rounded-xl p-4 sm:p-6 border border-gray-200 ${stat.action ? 'cursor-pointer hover:shadow-lg transition' : ''}`}
                 onClick={stat.action}
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-gray-600 text-sm mb-1">{stat.label}</p>
-                    <p className="text-3xl">{stat.value}</p>
+                    <p className="text-gray-600 text-xs sm:text-sm mb-1">{stat.label}</p>
+                    <p className="text-2xl sm:text-3xl">{stat.value}</p>
                   </div>
-                  <div className={`${stat.iconBg} p-3 rounded-lg`}>
-                    <Icon className={`w-6 h-6 ${stat.iconColor}`} />
+                  <div className={`${stat.iconBg} p-2 sm:p-3 rounded-lg`}>
+                    <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.iconColor}`} />
                   </div>
                 </div>
               </div>

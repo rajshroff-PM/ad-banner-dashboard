@@ -151,17 +151,17 @@ export function MasterPackageConfig() {
     <AdminLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl mb-2">Master Package Configuration</h2>
-            <p className="text-gray-600">Create generic master packages with flexible pricing slots</p>
+            <h2 className="text-xl sm:text-2xl mb-1 sm:mb-2">Master Package Configuration</h2>
+            <p className="text-sm sm:text-base text-gray-600">Create generic master packages with flexible pricing slots</p>
           </div>
           {!isCreating && (
             <button
               onClick={() => setIsCreating(true)}
-              className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition inline-flex items-center gap-2"
+              className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition inline-flex items-center justify-center gap-2 text-sm sm:text-base"
             >
-              <Plus className="w-5 h-5" />
+              <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
               Create Master Package
             </button>
           )}
