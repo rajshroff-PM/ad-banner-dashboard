@@ -129,7 +129,7 @@ export function OrderHistory() {
                   {myOrders.map(order => {
                     const statusConfig = getStatusConfig(order.status);
                     const StatusIcon = statusConfig.icon;
-                    
+
                     return (
                       <tr key={order.id} className="hover:bg-gray-50 transition">
                         <td className="px-6 py-4">
@@ -189,7 +189,7 @@ export function OrderHistory() {
             <div className="p-6 border-b border-gray-200">
               <h3 className="text-xl">Order Details</h3>
             </div>
-            
+
             <div className="p-6 space-y-6">
               {/* Banner Preview */}
               <div>

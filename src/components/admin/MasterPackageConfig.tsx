@@ -372,8 +372,8 @@ export function MasterPackageConfig() {
                 )}
 
                 {/* Add New Slot */}
-                <div className="flex gap-4 items-end bg-gray-50 p-4 rounded-lg">
-                  <div className="flex-1">
+                <div className="flex flex-col md:flex-row gap-4 md:items-end bg-gray-50 p-4 rounded-lg">
+                  <div className="w-full md:flex-1">
                     <label className="block text-sm text-gray-600 mb-1">Duration</label>
                     <select
                       value={slotInput.duration}
@@ -386,7 +386,7 @@ export function MasterPackageConfig() {
                       <option value="yearly">Yearly</option>
                     </select>
                   </div>
-                  <div className="flex-1">
+                  <div className="w-full md:flex-1">
                     <label className="block text-sm text-gray-600 mb-1">Price (₹)</label>
                     <input
                       type="number"
@@ -399,7 +399,7 @@ export function MasterPackageConfig() {
                   <button
                     type="button"
                     onClick={addSlot}
-                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition flex items-center gap-2 h-[42px]"
+                    className="w-full md:w-auto px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition flex items-center justify-center gap-2 h-[42px]"
                   >
                     <Plus className="w-4 h-4" />
                     Add Slot

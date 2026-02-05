@@ -72,8 +72,8 @@ export function BannerApprovals() {
               key={status}
               onClick={() => setFilter(status)}
               className={`px-4 py-2 rounded-lg text-sm transition ${filter === status
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300'
+                ? 'bg-purple-600 text-white'
+                : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300'
                 }`}
             >
               {status === 'under_review' ? 'Pending' : status === 'all' ? 'All' : status.charAt(0).toUpperCase() + status.slice(1)}
@@ -270,14 +270,14 @@ export function BannerApprovals() {
                     </div>
                     <div className="h-px w-4 bg-gray-300"></div>
                     <div className={`flex items-center gap-2 px-3 py-1 rounded ${selectedOrderDetails.approvalStage === 'second_approver' ? 'bg-yellow-200 text-yellow-800' :
-                        selectedOrderDetails.approvalStage === 'scheduler' || selectedOrderDetails.approvalStage === 'final_approval' ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-600'
+                      selectedOrderDetails.approvalStage === 'scheduler' || selectedOrderDetails.approvalStage === 'final_approval' ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-600'
                       }`}>
                       <span className="text-xs">2nd Approval</span>
                       {(selectedOrderDetails.approvalStage === 'scheduler' || selectedOrderDetails.approvalStage === 'final_approval') && <CheckCircle className="w-3 h-3" />}
                     </div>
                     <div className="h-px w-4 bg-gray-300"></div>
                     <div className={`flex items-center gap-2 px-3 py-1 rounded ${selectedOrderDetails.approvalStage === 'scheduler' ? 'bg-yellow-200 text-yellow-800' :
-                        selectedOrderDetails.approvalStage === 'final_approval' ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-600'
+                      selectedOrderDetails.approvalStage === 'final_approval' ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-600'
                       }`}>
                       <span className="text-xs">Scheduler</span>
                       {selectedOrderDetails.approvalStage === 'final_approval' && <CheckCircle className="w-3 h-3" />}

@@ -94,8 +94,8 @@ export function AdminDashboard() {
           {stats.map((stat) => {
             const Icon = stat.icon;
             return (
-              <div 
-                key={stat.label} 
+              <div
+                key={stat.label}
                 className={`bg-white rounded-xl p-6 border border-gray-200 ${stat.action ? 'cursor-pointer hover:shadow-lg transition' : ''}`}
                 onClick={stat.action}
               >
@@ -169,7 +169,7 @@ export function AdminDashboard() {
               View All
             </button>
           </div>
-          
+
           {recentOrders.length > 0 ? (
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
               <div className="overflow-x-auto">
